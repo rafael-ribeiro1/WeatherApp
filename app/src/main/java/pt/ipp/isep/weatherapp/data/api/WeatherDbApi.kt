@@ -10,6 +10,6 @@ private const val WEATHER_PATH = "data/weather/{$LOCATION_PARAM}"
 interface WeatherDbApi {
 
     @GET(WEATHER_PATH)
-    suspend fun getWeatherInLocation(@Path(LOCATION_PARAM) location: String): List<WeatherInfo>
+    suspend fun getWeatherInLocation(@Path(LOCATION_PARAM) location: String): WeatherInfo
 
 }
