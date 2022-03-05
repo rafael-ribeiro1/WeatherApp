@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <dimen name="location_search_margin_horizontal">10dp</dimen>
+    <dimen name="location_search_margin_vertical">5dp</dimen>
+    <dimen name="edit_text_search_icon_padding">7dp</dimen>
+    <dimen name="edit_text_search_min_height">48dp</dimen>
+    <dimen name="tv_saved_locations_margin_top">15dp</dimen>
+    <dimen name="divider_margin_horizontal">10dp</dimen>
+    <dimen name="divider_height">1dp</dimen>
+    <dimen name="no_saved_locations_text_size">20sp</dimen>
+    <dimen name="saved_locations_list_margin_top">10dp</dimen>
+</resources>
