@@ -1,0 +1,88 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:padding="?dialogPreferredPadding">
+
+    <ImageView
+        android:id="@+id/weather_dialog_image_view"
+        android:layout_width="@dimen/dialog_image_size"
+        android:layout_height="@dimen/dialog_image_size"
+        android:layout_alignParentStart="true"
+        android:layout_alignParentTop="true"
+        android:layout_marginStart="0dp"
+        android:layout_marginTop="0dp" />
+
+    <TextView
+        android:id="@+id/tv_dialog_weather_comment"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/weather_dialog_image_view"
+        android:layout_alignParentStart="true"
+        android:layout_marginStart="0dp"
+        android:layout_marginTop="@dimen/dialog_weather_comment_margin"
+        tools:text="Sunny"
+        android:textSize="@dimen/dialog_weather_comment_text_size" />
+
+    <TextView
+        android:id="@+id/tv_dialog_temp_f_m"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentTop="true"
+        android:layout_alignParentEnd="true"
+        android:layout_marginTop="@dimen/dialog_small_temp_margin_top"
+        android:layout_marginEnd="0dp"
+        android:textSize="@dimen/dialog_small_temp_text_size"
+        android:text="@string/fahrenheit" />
+
+    <TextView
+        android:id="@+id/tv_dialog_temp_f"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignTop="@+id/tv_dialog_temp_f_m"
+        android:layout_alignBottom="@+id/tv_dialog_temp_f_m"
+        android:layout_marginTop="0dp"
+        android:layout_marginEnd="0dp"
+        android:layout_marginBottom="0dp"
+        android:layout_toStartOf="@+id/tv_dialog_temp_f_m"
+        android:textSize="@dimen/dialog_small_temp_text_size"
+        tools:text="51" />
+
+    <View
+        android:id="@+id/dialog_temp_divider"
+        android:layout_width="@dimen/dialog_divider_width"
+        android:layout_height="match_parent"
+        android:layout_alignTop="@+id/tv_dialog_temp_f"
+        android:layout_alignBottom="@+id/tv_dialog_temp_f"
+        android:layout_marginTop="0dp"
+        android:layout_marginEnd="@dimen/dialog_small_temp_margin_horizontal"
+        android:layout_marginBottom="0dp"
+        android:layout_toStartOf="@+id/tv_dialog_temp_f"
+        android:background="?android:attr/listDivider" />
+
+    <TextView
+        android:id="@+id/tv_dialog_temp_c_m"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignTop="@+id/dialog_temp_divider"
+        android:layout_alignBottom="@+id/dialog_temp_divider"
+        android:layout_marginTop="0dp"
+        android:layout_marginEnd="@dimen/dialog_small_temp_margin_horizontal"
+        android:layout_marginBottom="0dp"
+        android:layout_toStartOf="@+id/dialog_temp_divider"
+        android:textSize="@dimen/dialog_small_temp_text_size"
+        android:text="@string/celsius" />
+
+    <TextView
+        android:id="@+id/tv_dialog_temp_c"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentTop="true"
+        android:layout_marginTop="0dp"
+        android:layout_marginEnd="0dp"
+        android:layout_toStartOf="@+id/tv_dialog_temp_c_m"
+        android:includeFontPadding="false"
+        android:textSize="@dimen/dialog_big_temp_text_size"
+        tools:text="11" />
+</RelativeLayout>

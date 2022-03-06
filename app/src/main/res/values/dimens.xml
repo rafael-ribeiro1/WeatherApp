@@ -9,4 +9,12 @@
     <dimen name="divider_height">1dp</dimen>
     <dimen name="no_saved_locations_text_size">20sp</dimen>
     <dimen name="saved_locations_list_margin_top">10dp</dimen>
+    <dimen name="dialog_image_size">48dp</dimen>
+    <dimen name="dialog_weather_comment_margin">3dp</dimen>
+    <dimen name="dialog_weather_comment_text_size">20sp</dimen>
+    <dimen name="dialog_small_temp_margin_top">3dp</dimen>
+    <dimen name="dialog_small_temp_text_size">18sp</dimen>
+    <dimen name="dialog_small_temp_margin_horizontal">5dp</dimen>
+    <dimen name="dialog_big_temp_text_size">40sp</dimen>
+    <dimen name="dialog_divider_width">3dp</dimen>
 </resources>

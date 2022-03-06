@@ -2,11 +2,13 @@ package pt.ipp.isep.weatherapp.presentation
 
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
-import android.util.Log
 import androidx.activity.viewModels
+import com.google.android.material.snackbar.Snackbar
+import pt.ipp.isep.weatherapp.DIALOG_PREVIEW_TAG
 import pt.ipp.isep.weatherapp.R
 import pt.ipp.isep.weatherapp.WeatherApplication
 import pt.ipp.isep.weatherapp.databinding.ActivityMainBinding
+import pt.ipp.isep.weatherapp.presentation.dialog.LocationPreviewDialogFragment
 import pt.ipp.isep.weatherapp.presentation.viewmodel.MainViewModel
 import pt.ipp.isep.weatherapp.presentation.viewmodel.MainViewModelFactory
 
@@ -35,10 +37,13 @@ class MainActivity : AppCompatActivity() {
             disableSearch()
             viewModel.weatherInLocation(location).observe(this) {
                 enableSearch()
-                // TODO: implement preview Dialog
-                Log.d("MainActivity", it.message.toString())
+                if (it.message != null) {
+                    Snackbar.make(binding.btnSearchLocation, getString(R.string.no_location_found), Snackbar.LENGTH_LONG)
+                        .show()
+                }
                 val data = it.data ?: return@observe
-                Log.d("MainActivity", data.toString())
+                val dialog = LocationPreviewDialogFragment(data)
+                dialog.show(supportFragmentManager, DIALOG_PREVIEW_TAG)
             }
         }
     }
