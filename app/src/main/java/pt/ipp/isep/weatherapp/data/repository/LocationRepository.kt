@@ -1,6 +1,7 @@
 package pt.ipp.isep.weatherapp.data.repository
 
 import androidx.annotation.WorkerThread
+import kotlinx.coroutines.flow.Flow
 import pt.ipp.isep.weatherapp.data.model.location.Location
 import pt.ipp.isep.weatherapp.data.persistence.dao.LocationDao
 
@@ -11,7 +12,7 @@ class LocationRepository(private val locationDao: LocationDao) {
         locationDao.insertLocation(location)
     }
 
-    suspend fun locations() : List<Location> = locationDao.getLocations()
+    val locations : Flow<List<Location>> = locationDao.getLocations()
 
     suspend fun existsLocation(location: String) : Boolean = locationDao.existsLocation(location)
 

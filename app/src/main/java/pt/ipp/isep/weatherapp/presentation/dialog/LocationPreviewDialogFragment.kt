@@ -10,7 +10,10 @@ import com.bumptech.glide.Glide
 import pt.ipp.isep.weatherapp.R
 import pt.ipp.isep.weatherapp.data.model.weatherinfo.WeatherInfo
 
-class LocationPreviewDialogFragment(private val weatherInfo: WeatherInfo) : DialogFragment() {
+class LocationPreviewDialogFragment(
+    private val weatherInfo: WeatherInfo,
+    private val saveLocation: () -> Unit
+) : DialogFragment() {
 
     override fun onCreateDialog(savedInstanceState: Bundle?): Dialog {
         val dialog = activity?.let {
@@ -18,7 +21,7 @@ class LocationPreviewDialogFragment(private val weatherInfo: WeatherInfo) : Dial
             val view = createView()
             builder.setView(view)
                 .setPositiveButton(getString(R.string.save)) { dialog, _ ->
-                    // TODO: save location
+                    saveLocation()
                     dialog.dismiss()
                 }
                 .setNegativeButton(getString(R.string.cancel)) { dialog, _ ->

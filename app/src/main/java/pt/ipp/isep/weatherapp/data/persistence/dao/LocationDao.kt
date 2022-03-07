@@ -1,6 +1,7 @@
 package pt.ipp.isep.weatherapp.data.persistence.dao
 
 import androidx.room.*
+import kotlinx.coroutines.flow.Flow
 import pt.ipp.isep.weatherapp.data.model.location.Location
 
 @Dao
@@ -10,7 +11,7 @@ interface LocationDao {
     suspend fun insertLocation(location: Location)
 
     @Query("SELECT * FROM Location")
-    suspend fun getLocations(): List<Location>
+    fun getLocations(): Flow<List<Location>>
 
     @Query("SELECT EXISTS(SELECT * FROM Location WHERE region = :location)")
     suspend fun existsLocation(location: String): Boolean

@@ -1,14 +1,20 @@
 package pt.ipp.isep.weatherapp.presentation.viewmodel
 
-import androidx.lifecycle.ViewModel
-import androidx.lifecycle.ViewModelProvider
-import androidx.lifecycle.liveData
+import androidx.lifecycle.*
 import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.launch
+import pt.ipp.isep.weatherapp.data.model.location.Location
+import pt.ipp.isep.weatherapp.data.repository.LocationRepository
 import pt.ipp.isep.weatherapp.data.repository.WeatherRepository
 import pt.ipp.isep.weatherapp.utils.RequestResult
 import java.lang.Exception
 
-class MainViewModel(private val weatherRepository: WeatherRepository) : ViewModel() {
+class MainViewModel(
+    private val weatherRepository: WeatherRepository,
+    private val locationRepository: LocationRepository
+) : ViewModel() {
+
+    val savedLocations: LiveData<List<Location>> = locationRepository.locations.asLiveData()
 
     fun weatherInLocation(location: String) = liveData(Dispatchers.IO) {
         try {
@@ -18,13 +24,24 @@ class MainViewModel(private val weatherRepository: WeatherRepository) : ViewMode
         }
     }
 
+    fun addNewLocation(location: Location) = viewModelScope.launch {
+        locationRepository.insertLocation(location)
+    }
+
+    fun existsLocation(location: String) = liveData(Dispatchers.IO) {
+        emit(locationRepository.existsLocation(location))
+    }
+
 }
 
-class MainViewModelFactory(private val repository: WeatherRepository) : ViewModelProvider.Factory {
+class MainViewModelFactory(
+    private val weatherRepository: WeatherRepository,
+    private val locationRepository: LocationRepository
+) : ViewModelProvider.Factory {
     override fun <T : ViewModel> create(modelClass: Class<T>): T {
         if (modelClass.isAssignableFrom(MainViewModel::class.java)) {
             @Suppress("UNCHECKED_CAST")
-            return MainViewModel(repository) as T
+            return MainViewModel(weatherRepository, locationRepository) as T
         }
         throw IllegalArgumentException("Unknown ViewModel class")
     }
