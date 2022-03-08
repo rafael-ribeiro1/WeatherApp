@@ -17,4 +17,9 @@
     <dimen name="dialog_small_temp_margin_horizontal">5dp</dimen>
     <dimen name="dialog_big_temp_text_size">40sp</dimen>
     <dimen name="dialog_divider_width">3dp</dimen>
+    <dimen name="item_location_padding">12dp</dimen>
+    <dimen name="item_location_space">50dp</dimen>
+    <dimen name="item_sign_size">17sp</dimen>
+    <dimen name="item_divider_height">1dp</dimen>
+    <dimen name="item_location_sign_margin">20dp</dimen>
 </resources>

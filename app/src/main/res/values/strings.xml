@@ -11,4 +11,5 @@
     <string name="add">Add</string>
     <string name="no_location_found">No location found</string>
     <string name="location_already_exists">Location already exists</string>
+    <string name="sign_item"><![CDATA[>]]></string>
 </resources>

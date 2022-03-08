@@ -65,6 +65,7 @@
         app:layout_constraintTop_toTopOf="@+id/tv_saved_locations" />
 
     <TextView
+        android:id="@+id/tv_no_saved_location"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="@string/no_saved_locations"

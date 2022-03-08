@@ -3,7 +3,9 @@ package pt.ipp.isep.weatherapp.presentation
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.util.Log
+import android.view.View
 import androidx.activity.viewModels
+import androidx.recyclerview.widget.LinearLayoutManager
 import com.google.android.material.snackbar.Snackbar
 import pt.ipp.isep.weatherapp.DIALOG_PREVIEW_TAG
 import pt.ipp.isep.weatherapp.R
@@ -12,6 +14,7 @@ import pt.ipp.isep.weatherapp.data.persistence.model.LastUpdate
 import pt.ipp.isep.weatherapp.data.persistence.model.Location
 import pt.ipp.isep.weatherapp.data.api.model.WeatherInfo
 import pt.ipp.isep.weatherapp.databinding.ActivityMainBinding
+import pt.ipp.isep.weatherapp.presentation.adapter.LocationsAdapter
 import pt.ipp.isep.weatherapp.presentation.dialog.LocationPreviewDialogFragment
 import pt.ipp.isep.weatherapp.presentation.viewmodel.MainViewModel
 import pt.ipp.isep.weatherapp.presentation.viewmodel.MainViewModelFactory
@@ -25,6 +28,8 @@ class MainActivity : AppCompatActivity() {
 
     private lateinit var binding: ActivityMainBinding
 
+    private lateinit var locationsAdapter: LocationsAdapter
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         binding = ActivityMainBinding.inflate(layoutInflater)
@@ -33,11 +38,7 @@ class MainActivity : AppCompatActivity() {
 
         enableSearch()
         setupLocationSearch()
-
-        viewModel.savedLocations.observe(this) {
-            // TODO: Submit list to RecyclerView adapter
-            Log.d("MainActivity", it.toString())
-        }
+        setupLocationsList()
     }
 
     private fun setupLocationSearch() {
@@ -86,6 +87,21 @@ class MainActivity : AppCompatActivity() {
             )
         }
         dialog.show(supportFragmentManager, DIALOG_PREVIEW_TAG)
+    }
+
+    private fun setupLocationsList() {
+        locationsAdapter = LocationsAdapter()
+        binding.savedLocationsList.apply {
+            layoutManager = LinearLayoutManager(applicationContext)
+            adapter = locationsAdapter
+        }
+
+        viewModel.savedLocations.observe(this) {
+            locationsAdapter.submitList(it)
+            if (it.isNotEmpty()) {
+                binding.tvNoSavedLocation.visibility = View.GONE
+            }
+        }
     }
 
     private fun disableSearch() {
