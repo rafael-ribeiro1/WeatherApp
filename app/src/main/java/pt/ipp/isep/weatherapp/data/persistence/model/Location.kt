@@ -1,4 +1,4 @@
-package pt.ipp.isep.weatherapp.data.model.location
+package pt.ipp.isep.weatherapp.data.persistence.model
 
 import androidx.room.*
 

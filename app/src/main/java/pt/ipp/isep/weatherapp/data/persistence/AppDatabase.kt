@@ -4,7 +4,7 @@ import android.content.Context
 import androidx.room.Database
 import androidx.room.Room
 import androidx.room.RoomDatabase
-import pt.ipp.isep.weatherapp.data.model.location.Location
+import pt.ipp.isep.weatherapp.data.persistence.model.Location
 import pt.ipp.isep.weatherapp.data.persistence.dao.LocationDao
 
 private const val DB_NAME = "weather_db"

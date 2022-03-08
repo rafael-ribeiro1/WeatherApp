@@ -1,6 +1,6 @@
 package pt.ipp.isep.weatherapp.data.api
 
-import pt.ipp.isep.weatherapp.data.model.weatherinfo.WeatherInfo
+import pt.ipp.isep.weatherapp.data.api.model.WeatherInfo
 import retrofit2.http.GET
 import retrofit2.http.Path
 

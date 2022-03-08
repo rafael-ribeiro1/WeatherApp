@@ -2,7 +2,7 @@ package pt.ipp.isep.weatherapp.data.repository
 
 import androidx.annotation.WorkerThread
 import kotlinx.coroutines.flow.Flow
-import pt.ipp.isep.weatherapp.data.model.location.Location
+import pt.ipp.isep.weatherapp.data.persistence.model.Location
 import pt.ipp.isep.weatherapp.data.persistence.dao.LocationDao
 
 class LocationRepository(private val locationDao: LocationDao) {

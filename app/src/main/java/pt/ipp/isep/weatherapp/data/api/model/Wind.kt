@@ -1,4 +1,4 @@
-package pt.ipp.isep.weatherapp.data.model.weatherinfo
+package pt.ipp.isep.weatherapp.data.api.model
 
 
 import com.squareup.moshi.Json

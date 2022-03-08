@@ -8,9 +8,9 @@ import com.google.android.material.snackbar.Snackbar
 import pt.ipp.isep.weatherapp.DIALOG_PREVIEW_TAG
 import pt.ipp.isep.weatherapp.R
 import pt.ipp.isep.weatherapp.WeatherApplication
-import pt.ipp.isep.weatherapp.data.model.location.LastUpdate
-import pt.ipp.isep.weatherapp.data.model.location.Location
-import pt.ipp.isep.weatherapp.data.model.weatherinfo.WeatherInfo
+import pt.ipp.isep.weatherapp.data.persistence.model.LastUpdate
+import pt.ipp.isep.weatherapp.data.persistence.model.Location
+import pt.ipp.isep.weatherapp.data.api.model.WeatherInfo
 import pt.ipp.isep.weatherapp.databinding.ActivityMainBinding
 import pt.ipp.isep.weatherapp.presentation.dialog.LocationPreviewDialogFragment
 import pt.ipp.isep.weatherapp.presentation.viewmodel.MainViewModel

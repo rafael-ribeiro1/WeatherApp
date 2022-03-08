@@ -3,7 +3,7 @@ package pt.ipp.isep.weatherapp.presentation.viewmodel
 import androidx.lifecycle.*
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
-import pt.ipp.isep.weatherapp.data.model.location.Location
+import pt.ipp.isep.weatherapp.data.persistence.model.Location
 import pt.ipp.isep.weatherapp.data.repository.LocationRepository
 import pt.ipp.isep.weatherapp.data.repository.WeatherRepository
 import pt.ipp.isep.weatherapp.utils.RequestResult

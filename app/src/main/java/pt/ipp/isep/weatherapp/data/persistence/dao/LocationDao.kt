@@ -2,7 +2,7 @@ package pt.ipp.isep.weatherapp.data.persistence.dao
 
 import androidx.room.*
 import kotlinx.coroutines.flow.Flow
-import pt.ipp.isep.weatherapp.data.model.location.Location
+import pt.ipp.isep.weatherapp.data.persistence.model.Location
 
 @Dao
 interface LocationDao {
