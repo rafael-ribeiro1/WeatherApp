@@ -1,4 +1,4 @@
-package pt.ipp.isep.weatherapp.presentation.viewmodel
+package pt.ipp.isep.weatherapp.presentation.locationsscreen
 
 import androidx.lifecycle.*
 import kotlinx.coroutines.Dispatchers
@@ -9,7 +9,7 @@ import pt.ipp.isep.weatherapp.data.repository.WeatherRepository
 import pt.ipp.isep.weatherapp.utils.RequestResult
 import java.lang.Exception
 
-class MainViewModel(
+class LocationsScreenViewModel(
     private val weatherRepository: WeatherRepository,
     private val locationRepository: LocationRepository
 ) : ViewModel() {
@@ -34,14 +34,14 @@ class MainViewModel(
 
 }
 
-class MainViewModelFactory(
+class LocationsScreenViewModelFactory(
     private val weatherRepository: WeatherRepository,
     private val locationRepository: LocationRepository
 ) : ViewModelProvider.Factory {
     override fun <T : ViewModel> create(modelClass: Class<T>): T {
-        if (modelClass.isAssignableFrom(MainViewModel::class.java)) {
+        if (modelClass.isAssignableFrom(LocationsScreenViewModel::class.java)) {
             @Suppress("UNCHECKED_CAST")
-            return MainViewModel(weatherRepository, locationRepository) as T
+            return LocationsScreenViewModel(weatherRepository, locationRepository) as T
         }
         throw IllegalArgumentException("Unknown ViewModel class")
     }
