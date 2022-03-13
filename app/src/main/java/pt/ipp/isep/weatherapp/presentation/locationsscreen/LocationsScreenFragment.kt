@@ -6,8 +6,13 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
+import androidx.lifecycle.Lifecycle
+import androidx.lifecycle.lifecycleScope
+import androidx.lifecycle.repeatOnLifecycle
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.google.android.material.snackbar.Snackbar
+import kotlinx.coroutines.flow.collect
+import kotlinx.coroutines.launch
 import pt.ipp.isep.weatherapp.DIALOG_PREVIEW_TAG
 import pt.ipp.isep.weatherapp.R
 import pt.ipp.isep.weatherapp.WeatherApplication
@@ -45,24 +50,20 @@ class LocationsScreenFragment : Fragment() {
     }
 
     private fun setupLocationSearch() {
-        binding.btnSearchLocation.setOnClickListener {
-            val location = binding.editTextLocation.text.toString()
-            if (location.isEmpty()) {
-                return@setOnClickListener
-            }
-            disableSearch()
-            viewModel.weatherInLocation(location).observe(viewLifecycleOwner) {
-                enableSearch()
-                if (it.message != null) {
-                    Snackbar.make(
-                        binding.btnSearchLocation,
-                        getString(R.string.no_location_found),
-                        Snackbar.LENGTH_LONG
-                    ).show()
-                }
-                val data = it.data ?: return@observe
-                viewModel.existsLocation(data.region).observe(viewLifecycleOwner) { exists ->
-                    if (exists) {
+        viewLifecycleOwner.lifecycleScope.launch {
+            viewLifecycleOwner.repeatOnLifecycle(Lifecycle.State.STARTED) {
+                viewModel.requestResult.collect {
+                    enableSearch()
+                    val info = it.requestResult ?: return@collect
+                    if (info.message != null) {
+                        Snackbar.make(
+                            binding.btnSearchLocation,
+                            getString(R.string.no_location_found),
+                            Snackbar.LENGTH_LONG
+                        ).show()
+                    }
+                    val data = info.data ?: return@collect
+                    if (it.existsLocation) {
                         Snackbar.make(
                             binding.btnSearchLocation,
                             getString(R.string.location_already_exists),
@@ -73,6 +74,14 @@ class LocationsScreenFragment : Fragment() {
                     }
                 }
             }
+        }
+        binding.btnSearchLocation.setOnClickListener {
+            val location = binding.editTextLocation.text.toString()
+            if (location.isEmpty()) {
+                return@setOnClickListener
+            }
+            disableSearch()
+            viewModel.weatherInLocation(location)
         }
     }
 
@@ -98,11 +107,14 @@ class LocationsScreenFragment : Fragment() {
             layoutManager = LinearLayoutManager(activity?.applicationContext)
             adapter = locationsAdapter
         }
-
-        viewModel.savedLocations.observe(viewLifecycleOwner) {
-            locationsAdapter.submitList(it)
-            if (it.isNotEmpty()) {
-                binding.tvNoSavedLocation.visibility = View.GONE
+        viewLifecycleOwner.lifecycleScope.launch {
+            viewLifecycleOwner.repeatOnLifecycle(Lifecycle.State.STARTED) {
+                viewModel.savedLocations.collect {
+                    locationsAdapter.submitList(it)
+                    if (it.isNotEmpty()) {
+                        binding.tvNoSavedLocation.visibility = View.GONE
+                    }
+                }
             }
         }
     }
