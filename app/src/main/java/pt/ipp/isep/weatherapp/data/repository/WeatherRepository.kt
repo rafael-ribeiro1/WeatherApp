@@ -1,9 +1,10 @@
 package pt.ipp.isep.weatherapp.data.repository
 
 import pt.ipp.isep.weatherapp.data.api.WeatherDbApi
+import javax.inject.Inject
 
-class WeatherRepository(private val weatherDbApi: WeatherDbApi) {
+class WeatherRepository @Inject constructor(private val weatherDbApi: WeatherDbApi) : IWeatherRepository {
 
-    suspend fun weatherInLocation(location: String) = weatherDbApi.getWeatherInLocation(location)
+    override suspend fun weatherInLocation(location: String) = weatherDbApi.getWeatherInLocation(location)
 
 }

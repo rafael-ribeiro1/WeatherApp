@@ -1,6 +1,7 @@
 package pt.ipp.isep.weatherapp.presentation.locationsscreen
 
 import androidx.lifecycle.*
+import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.flow.*
 import kotlinx.coroutines.launch
@@ -10,8 +11,10 @@ import pt.ipp.isep.weatherapp.data.repository.LocationRepository
 import pt.ipp.isep.weatherapp.data.repository.WeatherRepository
 import pt.ipp.isep.weatherapp.utils.RequestResult
 import java.lang.Exception
+import javax.inject.Inject
 
-class LocationsScreenViewModel(
+@HiltViewModel
+class LocationsScreenViewModel @Inject constructor(
     private val weatherRepository: WeatherRepository,
     private val locationRepository: LocationRepository
 ) : ViewModel() {
@@ -39,17 +42,4 @@ class LocationsScreenViewModel(
         locationRepository.insertLocation(location)
     }
 
-}
-
-class LocationsScreenViewModelFactory(
-    private val weatherRepository: WeatherRepository,
-    private val locationRepository: LocationRepository
-) : ViewModelProvider.Factory {
-    override fun <T : ViewModel> create(modelClass: Class<T>): T {
-        if (modelClass.isAssignableFrom(LocationsScreenViewModel::class.java)) {
-            @Suppress("UNCHECKED_CAST")
-            return LocationsScreenViewModel(weatherRepository, locationRepository) as T
-        }
-        throw IllegalArgumentException("Unknown ViewModel class")
-    }
 }

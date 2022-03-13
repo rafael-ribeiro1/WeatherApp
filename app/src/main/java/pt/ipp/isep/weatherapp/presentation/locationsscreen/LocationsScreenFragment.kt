@@ -11,6 +11,7 @@ import androidx.lifecycle.lifecycleScope
 import androidx.lifecycle.repeatOnLifecycle
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.google.android.material.snackbar.Snackbar
+import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.coroutines.flow.collect
 import kotlinx.coroutines.launch
 import pt.ipp.isep.weatherapp.DIALOG_PREVIEW_TAG
@@ -23,12 +24,10 @@ import pt.ipp.isep.weatherapp.databinding.FragmentLocationsScreenBinding
 import pt.ipp.isep.weatherapp.presentation.adapter.LocationsAdapter
 import pt.ipp.isep.weatherapp.presentation.dialog.LocationPreviewDialogFragment
 
+@AndroidEntryPoint
 class LocationsScreenFragment : Fragment() {
 
-    private val viewModel: LocationsScreenViewModel by viewModels {
-        val application = (activity?.application as WeatherApplication)
-        LocationsScreenViewModelFactory(application.weatherRepository, application.locationRepository)
-    }
+    private val viewModel: LocationsScreenViewModel by viewModels()
 
     private lateinit var binding: FragmentLocationsScreenBinding
 
